@@ -11,7 +11,7 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("https://backend-zos8.onrender.com/login/", {
+      const res = await axios.post("https://backend-zos8.onrender.com/api/token/", {
         username,
         password,
       });

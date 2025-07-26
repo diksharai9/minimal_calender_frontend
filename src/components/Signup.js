@@ -11,7 +11,7 @@ const Signup = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("https://backend-zos8.onrender.com/api/register/", {
+      await axios.post("https://backend-zos8.onrender.com/register/", {
         username,
         password,
       });

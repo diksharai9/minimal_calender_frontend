@@ -188,7 +188,6 @@
 
 .task:hover {
   filter: brightness(1.2);
-  transform: translateY(-1px);
 }
 
 /* --- Responsive styles --- */

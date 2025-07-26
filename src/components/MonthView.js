@@ -59,7 +59,7 @@ const MonthView = ({ selectedDate, tasks, onAddTask, onTaskUpdate, darkMode, tog
 
     const requests = days.map((day) =>
       axios.post(
-        "http://localhost:8000/api/tasks/create/",
+        "https://backend-zos8.onrender.com/api/tasks/create/",
         {
           date: format(day, "yyyy-MM-dd"),
           description,

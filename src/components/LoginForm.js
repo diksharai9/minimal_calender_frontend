@@ -11,7 +11,7 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("https://backend-zos8.onrender.com/api/token-auth/", {
+      const res = await axios.post("https://backend-zos8.onrender.com/login/", {
         username,
         password,
       });
@@ -40,7 +40,7 @@ const Login = () => {
           required
         />
         <button type="submit">Login</button>
-        <p className="auth-switch" onClick={() => navigate("/signup")}>
+        <p className="auth-switch" onClick={() => navigate("/register")}>
           Don't have an account? <span>Register</span>
         </p>
       </form>

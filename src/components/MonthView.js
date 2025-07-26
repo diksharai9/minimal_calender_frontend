@@ -31,7 +31,7 @@ const MonthView = ({ selectedDate, tasks, onAddTask, onTaskUpdate, darkMode, tog
 
     axios
       .patch(
-        `http://localhost:8000/api/tasks/${taskId}/update/`,
+        `https://backend-zos8.onrender.com/api/tasks/${taskId}/update/`,
         { completed: !currentStatus },
         {
           headers: {

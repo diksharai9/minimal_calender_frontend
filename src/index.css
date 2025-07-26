@@ -1,3 +1,38 @@
+/* public/index.css */
+
+/* Global styles for dark mode by default */
+:root {
+  --bg: #121212; /* Dark background */
+  --text: #e0e0e0; /* Light text */
+  --accent: #007bff; /* A standard blue accent for buttons, active states */
+  --card: #1e1e1e; /* Card background color for day boxes, etc. */
+  --task-bg: #2a2a2a; /* Background for pending tasks */
+  --task-complete: #0f4c3a; /* Background for completed tasks (darker green) */
+  --border: #444; /* General border color for tasks, etc. */
+  --watermark-color: #F5F5F5; /* Color for the faded date watermark */
+  --completed-watermark-color: rgba(175, 255, 175, 0.85); /* For completed days date watermark */
+  --completed-border-color: #0f4c3a;
+  --accent: #007bff; /* A standard blue accent */
+  --accent-rgb: 0, 123, 255;/* Border for completed dayBox, should match task-complete for harmony in dark mode */
+}
+
+/* Light mode variables - these override the dark mode ones when data-theme="light" */
+[data-theme="light"] {
+  --bg: #f0f2f5; /* Light background */
+  --text: #333; /* Dark text */
+  --accent: #007bff; /* Accent color remains, but its usage will be refined */
+  --card: #ffffff; /* White card background */
+  --task-bg: #e0e0e0; /* Lighter background for pending tasks */
+  --task-complete: #d4edda; /* Softer, lighter green for completed tasks box */
+  --border: #ccc; /* Lighter general border color */
+  --watermark-color: #333; /* Darker watermark in light mode for general visibility */
+  --completed-watermark-color: #0f4c3a; /* DARKER green for completed date watermark in light mode, ensures visibility on light green background */
+  --completed-border-color: #a4d4b8;
+  --accent: #007bff; /* Accent color remains */
+  --accent-rgb: 0, 123, 255;/* Softer, darker green border for completed dayBox/tasks in light mode, complements --task-complete */
+}
+
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,6 +40,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg);
+  color: var(--text);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 code {

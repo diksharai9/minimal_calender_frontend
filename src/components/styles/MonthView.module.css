@@ -1,0 +1,312 @@
+/* components/styles/MonthView.module.css */
+
+/* REMOVED: The :root block is now entirely in index.css */
+
+.container {
+  flex: 1;
+  padding: 20px;
+  background: var(--bg); /* Uses global --bg */
+  color: var(--text); /* Uses global --text */
+  font-family: 'Poppins', sans-serif;
+  min-height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.headerRow {
+  display: flex;
+  /* Using flex-start for default alignment */
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 0 10px;
+  /* Use 'gap' for consistent spacing between items */
+  gap: 15px; /* Increased slightly for better spacing */
+  flex-wrap: wrap; /* Allow items to wrap when needed */
+}
+
+.heading {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 0;
+  flex-shrink: 0;
+  flex-grow: 1;
+  min-width: 180px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  line-height: 1.2;
+}
+
+.addMonthButton {
+  font-size: 16px;
+  padding: 4px 12px;
+  background: none;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+  line-height: 1.2;
+  height: auto;
+  flex-shrink: 0;
+  margin-left: 0; /* Handled by gap in headerRow */
+  align-self: center;
+}
+
+.addMonthButton:hover {
+  background-color: var(--accent);
+  color: var(--bg); /* Uses global --bg for hover effect */
+  box-shadow: 0 0 8px var(--accent);
+}
+
+.calendarGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 12px;
+}
+
+.dayBox {
+  position: relative;
+  min-height: 110px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 14px;
+  padding: 10px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.04); /* Consider making this border color dynamic with theme */
+  background-color: var(--card); /* Uses global --card */
+  backdrop-filter: blur(2px); /* This effect might be less visible on lighter backgrounds */
+  overflow: hidden;
+}
+
+.emptyDayBox {
+  background-color: transparent;
+  border: none;
+  min-height: 110px;
+}
+
+@keyframes neonPulse {
+  0%, 100% { box-shadow: 0 0 4px rgba(255, 0, 0, 0.3), 4px 0 6px rgba(0, 255, 0, 0.25), -4px 0 6px rgba(0, 0, 255, 0.25), 0 4px 6px rgba(255, 255, 0, 0.2), 0 -4px 6px rgba(255, 0, 255, 0.2); }
+  50% { box-shadow: 0 0 6px rgba(255, 0, 0, 0.4), 5px 0 8px rgba(0, 255, 0, 0.35), -5px 0 8px rgba(0, 0, 255, 0.35), 0 5px 8px rgba(255, 255, 0, 0.3), 0 -5px 8px rgba(255, 0, 255, 0.3); }
+}
+
+.dayBoxToday {
+  position: relative;
+  background-color: var(--card); /* Uses global --card */
+  border-radius: 14px;
+  padding: 10px;
+  transform: translateY(-3px);
+  animation: neonPulse 2.5s ease-in-out infinite;
+  z-index: 1;
+  box-shadow: inset 0 0 0 rgba(0, 0, 0, 0);
+}
+
+.dayBoxCompleted {
+  background-color: var(--task-complete); /* Uses global --task-complete */
+  border-color: var(--accent);
+}
+
+.dayBox:hover {
+  transform: translateY(-2px);
+  /* Consider using a theme variable or adjusting the alpha based on theme */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Darker shadow for light mode, lighter for dark */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dayBoxCompleted .dateWatermark {
+  color: var(--completed-watermark-color); /* Uses global --completed-watermark-color */
+}
+
+.dateWatermark {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--watermark-color); /* Uses global --watermark-color */
+  z-index: 0;
+  pointer-events: none;
+  line-height: 1;
+  opacity: 0.15;
+}
+
+/* Day of Week Label - ALWAYS visible */
+.dayOfWeekMobile {
+  position: absolute;
+  top: 8px;
+  left: 10px;
+  font-size: 25px;
+  font-weight: 700;
+  color: var(--text); /* Uses global --text */
+  z-index: 1;
+  display: block;
+  line-height: 1;
+}
+
+.taskList {
+  margin-top: 28px;
+  z-index: 1;
+  flex-grow: 1;
+  overflow-y: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  padding-right: 2px;
+}
+
+.taskList::-webkit-scrollbar {
+  display: none;
+}
+
+.task {
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  margin-bottom: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border: 1px solid var(--border); /* Uses global --border */
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.taskCompleted {
+  background: var(--task-complete); /* Uses global --task-complete */
+  color: var(--text); /* Use global --text for completed task text */
+  border: 1px solid var(--accent);
+}
+
+.taskPending {
+  background: var(--task-bg); /* Uses global --task-bg */
+  color: var(--text); /* Uses global --text */
+  border: 1px solid var(--border); /* Uses global --border */
+}
+
+.task:hover {
+  filter: brightness(1.2);
+  transform: translateY(-1px);
+}
+
+/* --- Responsive styles --- */
+
+/* Desktop (Default - >1023px) */
+@media (min-width: 1024px) {
+  .dayBox, .emptyDayBox { min-height: 110px; }
+  /* Ensure headerRow is flex-start on large screens */
+  .headerRow {
+    justify-content: flex-start;
+  }
+  .heading {
+    flex-grow: 1;
+    min-width: 180px;
+  }
+}
+
+/* Laptop/Large Tablet (992px - 1023px) */
+@media (max-width: 1023px) {
+  .container { padding: 15px; }
+  .heading {
+    font-size: 26px;
+    flex-grow: 1;
+    min-width: unset;
+  }
+  .addMonthButton { padding: 3px 10px; font-size: 15px; }
+  .calendarGrid { grid-template-columns: repeat(6, 1fr); gap: 10px; }
+  .dayBox, .emptyDayBox { min-height: 100px; padding: 8px; }
+  .dateWatermark { font-size: 28px; top: 6px; right: 10px; }
+  .dayOfWeekMobile { font-size: 20px; top: 7px; left: 9px; }
+  .taskList { margin-top: 24px; }
+  .task { font-size: 11px; padding: 5px 8px; }
+}
+
+/* Tablet (768px - 991px) */
+@media (max-width: 991px) {
+  .container { padding: 10px; }
+  .heading { font-size: 24px; }
+  .addMonthButton { padding: 2px 8px; font-size: 14px; }
+  .calendarGrid { grid-template-columns: repeat(5, 1fr); gap: 8px; }
+  .dayBox, .emptyDayBox { min-height: 90px; padding: 7px; }
+  .dateWatermark { font-size: 26px; top: 5px; right: 9px; opacity: 0.1; }
+  .dayOfWeekMobile { font-size: 15px; top: 6px; left: 8px; }
+  .taskList { margin-top: 22px; }
+  .task { font-size: 10px; padding: 4px 7px; margin-bottom: 5px; }
+}
+
+/* Mobile (481px - 767px) */
+@media (max-width: 767px) {
+  .container { padding: 8px; }
+  .headerRow {
+    /* Kept flex-start here to ensure heading and button stay together */
+    justify-content: flex-start; /* Was space-between */
+    align-items: center; /* Was flex-start */
+  }
+  .heading {
+    font-size: 20px;
+    min-width: unset;
+    flex-basis: auto; /* Changed from 70% */
+    margin-right: 15px; /* Added a right margin to create space */
+    flex-grow: 1;
+  }
+  .addMonthButton {
+    padding: 1px 8px;
+    font-size: 10px;
+    flex-basis: auto;
+    margin-left: 0; /* Handled by gap/margin-right of heading */
+    margin-top: 0;
+    align-self: center;
+  }
+  .calendarGrid { grid-template-columns: repeat(3, 1fr); gap: 7px; }
+  .dayBox, .emptyDayBox { min-height: 80px; padding: 6px; }
+  .dateWatermark { font-size: 24px; top: 4px; right: 8px; }
+  .dayOfWeekMobile { font-size: 12px; top: 5px; left: 7px; }
+  .taskList { margin-top: 20px; }
+  .task { font-size: 9px; padding: 3px 6px; margin-bottom: 4px; }
+}
+
+/* Small Mobile (up to 480px) */
+@media (max-width: 480px) {
+  .container { padding: 5px; }
+  .heading {
+    font-size: 18px;
+    flex-basis: auto; /* Changed from 60% */
+    margin-right: 10px; /* Added a right margin */
+  }
+  .addMonthButton {
+    padding: 1px 8px;
+    font-size: 8px;
+    margin-top: 0;
+  }
+  .calendarGrid { grid-template-columns: repeat(2, 1fr); gap: 6px; }
+  .dayBox, .emptyDayBox { min-height: 70px; padding: 5px; }
+  .dateWatermark { font-size: 20px; top: 3px; right: 6px; opacity: 0.08; }
+  .dayOfWeekMobile { font-size: 10px; top: 4px; left: 6px; }
+  .taskList { margin-top: 18px; }
+  .task { font-size: 8px; padding: 2px 4px; margin-bottom: 3px; border-radius: 6px; }
+}
+/* Add this to your MonthView.module.css */
+.themeToggleButton {
+  font-size: 16px;
+  padding: 4px 12px;
+  background: none;
+  border: 1px solid var(--accent); /* Uses accent color */
+  color: var(--accent); /* Uses accent color */
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+  line-height: 1.2;
+  height: auto;
+  flex-shrink: 0;
+  /* Adjust margin to give some space from the '+' button */
+  margin-left: 15px; /* Adds space from the addMonthButton */
+  align-self: center;
+}
+
+.themeToggleButton:hover {
+  background-color: var(--accent);
+  color: var(--bg); /* Invert text color on hover */
+  box-shadow: 0 0 8px var(--accent);
+}

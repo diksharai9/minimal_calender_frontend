@@ -1,0 +1,147 @@
+/* src/components/styles/TaskModal.module.css */
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent dark overlay */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensure it's above other content */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* When the modal is shown, apply these styles */
+.modalOverlay[style*="opacity: 1"] {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modalContent {
+  background-color: var(--card); /* Use theme card background */
+  color: var(--text); /* Use theme text color */
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4); /* Deeper shadow */
+  width: 90%;
+  max-width: 450px;
+  transform: translateY(-20px); /* Start slightly above center */
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Animation for when modal opens */
+.modalOverlay[style*="opacity: 1"] .modalContent {
+  transform: translateY(0); /* Slide into place */
+  opacity: 1;
+}
+
+.modalHeader {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 25px;
+  text-align: center;
+  color: var(--accent); /* Header uses accent color */
+}
+
+.taskInput {
+  width: calc(100% - 20px); /* Account for padding */
+  padding: 12px 10px;
+  margin-bottom: 25px;
+  border: 1px solid var(--border); /* Theme-aware border */
+  border-radius: 10px;
+  background-color: var(--bg); /* Use main background for input area */
+  color: var(--text); /* Theme-aware text color */
+  font-size: 16px;
+  resize: vertical; /* Allow vertical resizing */
+  min-height: 80px; /* Minimum height for input */
+  max-height: 200px;
+  font-family: 'Poppins', sans-serif; /* Keep consistent font */
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.taskInput::placeholder {
+  color: var(--text);
+  opacity: 0.6; /* Slightly faded placeholder */
+}
+
+.taskInput:focus {
+  outline: none;
+  border-color: var(--accent); /* Accent border on focus */
+  box-shadow: 0 0 0 3px rgba(var(--accent-rgb, 0, 123, 255), 0.2); /* Soft glow, requires accent-rgb */
+}
+
+.modalActions {
+  display: flex;
+  justify-content: flex-end; /* Align buttons to the right */
+  gap: 15px; /* Space between buttons */
+  margin-top: auto; /* Push buttons to the bottom if content is short */
+}
+
+.saveButton,
+.cancelButton {
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-grow: 1; /* Allow buttons to grow to fill space */
+  max-width: 120px; /* Max width for buttons */
+}
+
+.saveButton {
+  background-color: var(--accent); /* Accent for save */
+  color: var(--bg); /* Text color from main background to contrast with accent */
+  border: none;
+}
+
+.saveButton:hover {
+  filter: brightness(1.1); /* Subtle hover effect */
+  box-shadow: 0 4px 10px rgba(var(--accent-rgb, 0, 123, 255), 0.3);
+}
+
+.cancelButton {
+  background: none;
+  border: 1px solid var(--border); /* Theme-aware border */
+  color: var(--text); /* Theme-aware text */
+}
+
+.cancelButton:hover {
+  background-color: var(--border); /* Subtle background change on hover */
+  color: var(--bg); /* Darker text for contrast on hover */
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 600px) {
+  .modalContent {
+    padding: 20px;
+    margin: 15px; /* Add margin to prevent sticking to edges */
+    box-sizing: border-box; /* Ensure padding is included in width */
+  }
+
+  .modalHeader {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+
+  .taskInput {
+    font-size: 14px;
+    min-height: 70px;
+  }
+
+  .saveButton,
+  .cancelButton {
+    padding: 8px 15px;
+    font-size: 14px;
+    flex-grow: 1; /* Buttons take equal space */
+    max-width: none; /* Remove max-width on mobile */
+  }
+}

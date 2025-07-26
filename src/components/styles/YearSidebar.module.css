@@ -1,0 +1,139 @@
+/* components/styles/YearSidebar.module.css */
+
+.sidebar {
+  width: 220px;
+  padding: 20px 15px; /* Slightly more horizontal padding */
+  background-color: var(--sidebar-bg);
+  border-right: 1px solid var(--sidebar-border); /* Use sidebar-specific border */
+  font-family: "Poppins", sans-serif;
+  color: var(--text);
+  min-height: 100vh;
+  transition: width 0.3s ease, background-color 0.3s ease, border-color 0.3s ease; /* Add color transitions */
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box; /* Ensures padding is included in width */
+  flex-shrink: 0; /* Prevent sidebar from shrinking when content grows */
+}
+
+.collapsed {
+  width: 60px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.yearLabel {
+  font-size: 22px; /* Slightly larger */
+  font-weight: 700; /* Bolder */
+  margin-bottom: 25px; /* More space below year */
+  text-align: center;
+  color: var(--accent);
+  cursor: pointer;
+  transition: color 0.3s ease; /* Smooth color transition */
+  letter-spacing: 0.5px; /* Slight spacing for modern look */
+  text-shadow: 0 0 5px rgba(0, 123, 255, 0.2); /* Subtle glow */
+}
+
+.yearLabel:hover {
+  filter: brightness(1.1); /* Subtle hover effect */
+  text-shadow: 0 0 8px var(--accent); /* More prominent glow on hover */
+}
+
+.collapsedLabel {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-size: 14px; /* Slightly larger font */
+  color: var(--accent);
+  user-select: none;
+  text-align: center;
+  font-weight: 700; /* Bolder */
+  opacity: 1; /* Always visible */
+  padding: 12px 8px; /* More padding */
+  border: 1px solid var(--collapsed-label-border); /* Use new variable */
+  border-radius: 12px; /* More rounded corners */
+  box-shadow: var(--collapsed-label-shadow); /* Use new variable */
+  background: var(--collapsed-label-bg); /* Use new variable */
+  transition: all 0.3s ease;
+  letter-spacing: 1px; /* More spacing for vertical text */
+  cursor: pointer; /* Ensure cursor pointer is visible */
+}
+
+.collapsedLabel:hover {
+  transform: rotate(180deg) scale(1.05); /* Slight scale on hover */
+  box-shadow: 0 0 15px var(--accent); /* More intense glow */
+  background: var(--collapsed-label-bg); /* Keep background consistent */
+}
+
+.monthList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px; /* Slightly less gap */
+  align-items: stretch; /* Stretch to fill sidebar width */
+  margin-top: 10px;
+}
+
+/* components/styles/YearSidebar.module.css */
+
+/* ... (previous CSS code) ... */
+
+.monthButton {
+  background: var(--month-button-bg);
+  border: 1px solid var(--border); /* Use general border variable */
+  color: var(--month-button-text);
+  padding: 10px 15px; /* More padding for a softer feel */
+  border-radius: 10px; /* More rounded */
+  font-size: 15px; /* Slightly larger font */
+  font-weight: 500; /* Medium weight */
+  cursor: pointer;
+  width: 100%;
+  /* CHANGE: Align text to the center */
+  text-align: center;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* text-align:centre; was a typo, corrected to text-align: center; */
+}
+
+.monthButton:hover {
+  background-color: var(--selected-month-bg); /* Still use selected month bg */
+  color: var(--selected-month-text); /* Use selected month text color */
+  border-color: var(--accent);
+  transform: translateX(5px); /* Slide slightly on hover */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Subtle shadow on hover */
+}
+
+.selectedMonth {
+  background: var(--selected-month-bg);
+  border: 1px solid var(--accent);
+  color: var(--selected-month-text);
+  box-shadow: 0 0 12px var(--accent); /* Clearer glow */
+  transform: scale(1.02); /* Slightly pop out when selected */
+  font-weight: 600; /* Bolder when selected */
+}
+
+/* ... (rest of the CSS code) ... */
+
+/* Responsive adjustments for the sidebar, if needed */
+@media (max-width: 767px) {
+  .sidebar {
+    width: 50px; /* Even smaller collapsed width on mobile */
+    padding: 15px 5px;
+  }
+  .collapsed {
+    width: 50px;
+  }
+  .yearLabel {
+    font-size: 18px;
+  }
+  .collapsedLabel {
+    font-size: 11px;
+    padding: 10px 5px;
+  }
+  .monthButton {
+    padding: 8px 10px;
+    font-size: 13px;
+  }
+}
